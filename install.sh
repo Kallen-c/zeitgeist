@@ -36,6 +36,7 @@ echo 'Node name: ' $NODENAME
 sleep 1
 echo 'export NODENAME='$NODENAME >> $HOME/.profile
 
+echo -e "Installing..."
 curl -s https://raw.githubusercontent.com/Kallen-c/utils/main/installers/install_ufw.sh | bash
 
 sudo apt-get -qq update
