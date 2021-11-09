@@ -39,7 +39,7 @@ echo 'export NODENAME='$NODENAME >> $HOME/.profile
 echo -e "Installing..."
 curl -s https://raw.githubusercontent.com/Kallen-c/utils/main/installers/install_ufw.sh | bash
 
-sudo apt-get -qq update
+sudo apt-get -qq update > /dev/null
 sudo apt-get -qq install make clang pkg-config libssl-dev build-essential git mc jq -y > /dev/null
 curl https://getsubstrate.io -sSf | bash -s -- --fast
 source $HOME/.cargo/env
