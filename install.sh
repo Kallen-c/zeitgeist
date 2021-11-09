@@ -30,13 +30,12 @@ echo -e ""
 
 
 if [ ! $NODENAME ]; then
-	read -p "Enter node name: " NODENAME
+	read -p "Node name: " NODENAME
 fi
-echo 'Your node name: ' $NODENAME
+echo 'Node name: ' $NODENAME
 sleep 1
 echo 'export NODENAME='$NODENAME >> $HOME/.profile
 
-#add ufw rules
 curl -s https://raw.githubusercontent.com/Kallen-c/utils/main/installers/install_ufw.sh | bash
 
 sudo apt update
@@ -49,7 +48,7 @@ git clone https://github.com/zeitgeistpm/zeitgeist.git
 cd zeitgeist
 git checkout v0.2.0
 ./scripts/init.sh
-#cargo build --release
+
 mkdir -p $HOME/zeitgeist/target/release/
 wget https://github.com/zeitgeistpm/zeitgeist/releases/download/v0.2.0/zeitgeist_parachain -O $HOME/zeitgeist/target/release/zeitgeist
 chmod +x $HOME/zeitgeist/target/release/zeitgeist
@@ -96,6 +95,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable zeitgeist
 sudo systemctl restart zeitgeist
 
-echo -e '\n\e[44mRun command to see logs: \e[0m\n'
-echo 'journalctl -n 100 -f -u zeitgeist'
+. <(wget -qO- https://raw.githubusercontent.com/Kallen-c/utils/main/miscellaneous/insert_variable.sh) -n zeitgeist_log -v "sudo journalctl -f -n 100 -u zeitgeistd" -a
+echo -e 'View logs command is zeitgeist_log'
 echo -e "\033[0m"
